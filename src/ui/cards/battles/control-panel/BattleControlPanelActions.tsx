@@ -1,10 +1,15 @@
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+
 import { useRouterInfo } from '@/hooks/useRouterInfo';
 
+import { Card } from '@/features/cards/domain/definitions.d';
+
 export function BattleControlPanelActions({
+  defender,
   simulateBattle
 }: {
+  defender: Card | null;
   simulateBattle: () => void;
 }) {
   const { updateSearchParams } = useRouterInfo();
@@ -13,14 +18,12 @@ export function BattleControlPanelActions({
     updateSearchParams('defender_id', '');
   };
 
-  return (
-    <Box
-      display='flex'
-      flexGrow={1}
-      flexDirection='column'
+  return defender ? (
+    <Stack
       justifyContent='center'
       alignItems='center'
-      gap='2rem'>
+      flex={1}
+      gap={1}>
       <Button
         variant='contained'
         onClick={simulateBattle}
@@ -33,6 +36,6 @@ export function BattleControlPanelActions({
         fullWidth>
         Change Opponent
       </Button>
-    </Box>
-  );
+    </Stack>
+  ) : null;
 }

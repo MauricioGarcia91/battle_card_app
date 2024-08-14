@@ -1,3 +1,4 @@
+'use client';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
@@ -5,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useDebouncedCallback } from 'use-debounce';
 import { useRouterInfo } from '@/hooks/useRouterInfo';
 
-export function SearchCardText() {
+export function CardSearchText() {
   const { q, updateSearchParams } = useRouterInfo();
 
   const handleSearchText = useDebouncedCallback(

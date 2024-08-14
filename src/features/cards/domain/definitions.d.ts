@@ -7,11 +7,6 @@ export interface SearchCardsParams {
   weakness?: string;
 }
 
-export interface CardType {
-  id: string;
-  name: string;
-}
-
 export interface Card {
   id: string;
   name: string;

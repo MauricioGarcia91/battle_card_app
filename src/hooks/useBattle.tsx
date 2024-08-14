@@ -2,9 +2,17 @@ import { useEffect, useState } from 'react';
 import { useRouterInfo } from './useRouterInfo';
 import { useNetworkStatus } from './useNetworkStatus';
 
-import { getCardById, simulateCardBattle, searchCards } from '@/lib/actions';
+import {
+  getById,
+  simulateBattle as simulateCardBattle,
+  search
+} from '@/features/cards/adapters/container-di';
 
-import { BattleResult, Card, SearchCardsParams } from '@/lib/definitions.d';
+import {
+  BattleResult,
+  Card,
+  SearchCardsParams
+} from '@/features/cards/domain/definitions.d';
 
 export const useBattle = () => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -21,7 +29,7 @@ export const useBattle = () => {
       resistance
     }: SearchCardsParams) => {
       setLoading(true);
-      const result = await searchCards({ q, weakness, resistance });
+      const result = await search({ q, weakness, resistance });
 
       if (!result) {
         setError('Cards not found');
@@ -39,7 +47,7 @@ export const useBattle = () => {
   useEffect(() => {
     const loadAttacker = async (cardId: string) => {
       setLoading(true);
-      const data = await getCardById(cardId);
+      const data = await getById(cardId);
 
       if (!data) {
         setError('Card not found');
@@ -57,7 +65,7 @@ export const useBattle = () => {
   useEffect(() => {
     const loadDefender = async (cardId: string) => {
       setLoading(true);
-      const data = await getCardById(cardId);
+      const data = await getById(cardId);
 
       if (!data) {
         setError('Card not found');

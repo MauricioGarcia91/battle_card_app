@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
@@ -7,18 +7,20 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
-import { SearchCardText } from '../SearchCardText';
+import { CardSearchText } from '../../filters/CardSearchText';
 
 import { useRouterInfo } from '@/hooks/useRouterInfo';
 
-import { Card } from '@/lib/definitions.d';
+import { Card } from '@/features/cards/domain/definitions.d';
 
-export function SearchCardOpponent({
+export function BattleControlPanelOpponentSelector({
   cards,
-  attacker
+  attacker,
+  defender
 }: {
   cards: Card[];
   attacker: Card | null;
+  defender: Card | null;
 }) {
   const { updateSearchParams, q, weakness, resistance } = useRouterInfo();
 
@@ -36,12 +38,10 @@ export function SearchCardOpponent({
     }
   };
 
-  return (
-    <Box
-      display='flex'
-      flexDirection='column'
+  return !defender ? (
+    <Stack
       alignItems='start'
-      gap='0.5rem'>
+      gap={1}>
       <Typography
         variant='subtitle1'
         textAlign='center'
@@ -78,7 +78,7 @@ export function SearchCardOpponent({
         noWrap>
         <strong>Search an opponent</strong>
       </Typography>
-      <SearchCardText />
+      <CardSearchText />
       {cards.length > 0 ? (
         <List
           sx={{
@@ -103,6 +103,6 @@ export function SearchCardOpponent({
           </Typography>
         )
       )}
-    </Box>
-  );
+    </Stack>
+  ) : null;
 }

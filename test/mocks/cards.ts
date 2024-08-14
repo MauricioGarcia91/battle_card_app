@@ -8,7 +8,7 @@ export const geodudeCard = {
   weaknessPoint: 2,
   imgUrl:
     'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/074.png',
-  created_at: '2024-07-16T15:25:50.698Z',
+  createdAt: '2024-07-16T15:25:50.698Z',
   resistance: {
     id: '3407f4df-f89c-4738-a28c-be826d60396e',
     name: 'Electric'

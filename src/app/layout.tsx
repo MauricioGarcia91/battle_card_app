@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
+
+import Stack from '@mui/material/Stack';
+
+import { Navbar } from '@/ui/commons/Navbar';
+import { NetworkStatus } from '@/ui/commons/NetworkStatus';
+
 import { Inter } from 'next/font/google';
-import Navbar from '@/ui/Navbar';
-import { NetworkStatus } from '@/ui/NetworkStatus';
 
 import './globals.css';
 
@@ -9,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Battle Card Game',
-  description: 'Challenge for Cook Unity'
+  description: 'Author: Garcia Mauricio'
 };
 
 export default function RootLayout({
@@ -20,8 +24,19 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <Navbar />
-        <NetworkStatus>{children}</NetworkStatus>
+        <Stack
+          minHeight='inherit'
+          gap={2}>
+          <Navbar />
+          <NetworkStatus>
+            <Stack
+              maxWidth='lg'
+              margin='0 auto'
+              flex={1}>
+              {children}
+            </Stack>
+          </NetworkStatus>
+        </Stack>
       </body>
     </html>
   );

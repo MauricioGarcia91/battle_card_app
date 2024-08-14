@@ -14,7 +14,7 @@ const links = [
   }
 ];
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <AppBar position='static'>
       <Toolbar>

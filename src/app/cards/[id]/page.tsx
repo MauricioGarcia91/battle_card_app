@@ -1,53 +1,37 @@
-'use client';
-import Box from '@mui/material/Box';
-import { useBattle } from '@/hooks/useBattle';
-import { BattleCard } from '@/ui/BattleCard';
-import { BattleControlPanel } from '@/ui/BattleControlPanel/BattleControlPanel';
-import { BattleResults } from '@/ui/BattleResults';
+import { Suspense } from 'react';
+import Stack from '@mui/material/Stack';
 
-export default function BattlePage() {
-  const {
-    cards,
-    attacker,
-    defender,
-    battleResult,
-    simulateBattle,
-    clearBattle
-  } = useBattle();
+import { CardDetail } from '@/ui/cards/CardDetail';
+import { BattleControlPanel } from '@/ui/cards/battles/control-panel/BattleControlPanel';
 
+export default function CardDetailPage({
+  params,
+  searchParams
+}: {
+  params: { id: string };
+  searchParams: {
+    defender_id: string;
+  };
+}) {
   return (
-    <Box
-      component='main'
-      className='container'
-      display='flex'
-      flexDirection='row'
-      alignItems='center'
-      p='0 25rem'
-      gap='3rem'>
-      <BattleCard
-        role='attacker'
-        card={attacker}
-      />
-      <BattleControlPanel
-        cards={cards}
-        attacker={attacker}
-        defender={defender}
-        simulateBattle={simulateBattle}
-      />
-      {defender && (
-        <BattleCard
-          role='defender'
-          card={defender}
+    <Stack
+      direction='row'
+      gap={2}>
+      <Suspense>
+        <CardDetail
+          cardId={params.id}
+          role='attacker'
         />
+      </Suspense>
+      <BattleControlPanel />
+      {searchParams.defender_id && (
+        <Suspense>
+          <CardDetail
+            cardId={searchParams.defender_id}
+            role='defender'
+          />
+        </Suspense>
       )}
-      {battleResult && (
-        <BattleResults
-          attacker={attacker!}
-          defender={defender!}
-          battleResult={battleResult}
-          onClose={clearBattle}
-        />
-      )}
-    </Box>
+    </Stack>
   );
 }

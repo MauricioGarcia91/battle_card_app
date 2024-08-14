@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
-import { CardList } from '@/ui/CardList';
-import { SearchToolBar } from '@/ui/SearchToolBar';
-import { CardListSkeleton } from '@/ui/skeletons/CardListSkeleton';
+import { CardList } from '@/ui/cards/CardList';
+import { CardsFilters } from '@/ui/cards/filters/CardsFilters';
 
-import { SearchCardsParams } from '@/lib/definitions.d';
+import { CardListSkeleton } from '@/ui/cards/skeletons/CardListSkeleton';
+
+import { SearchCardsParams } from '@/features/cards/domain/definitions.d';
 
 export default function CardsPage({
   searchParams
@@ -14,18 +15,15 @@ export default function CardsPage({
   searchParams: SearchCardsParams;
 }) {
   return (
-    <Box
-      component='main'
-      className='container'
-      flexDirection='column'
-      alignItems='center'
-      maxHeight='100%'
-      p='3rem'
-      gap='3rem'>
-      <SearchToolBar />
+    <Stack
+      maxWidth='md'
+      flex={1}
+      margin='0 auto'
+      gap={2}>
+      <CardsFilters />
       <Suspense fallback={<CardListSkeleton />}>
         <CardList searchParams={searchParams} />
       </Suspense>
-    </Box>
+    </Stack>
   );
 }

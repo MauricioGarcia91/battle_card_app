@@ -6,8 +6,8 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom'
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+  testEnvironment: 'jest-environment-jsdom'
 };
 
 export default createJestConfig(config);
