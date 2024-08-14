@@ -66,15 +66,14 @@ By default, this application runs on port 3000 and is configured to connect to t
 
 ### The application follows Next.js standards for page and route definitions. The folder structure is as follows:
 
-- `App/`: Pages
-- `UI/`: User interface components and skeletons for async components
-- `Store/`: State management (Zustand stores)
-- `Hooks/`: Custom React hooks
-- `Lib/`:
-  - Server actions
-  - Services
-  - Definitions
-  - General utilities
+- `app/`: Pages
+- `ui/`: User interface components and skeletons for async components
+- `store/`: State management (Zustand stores)
+- `hooks/`: Custom React hooks
+- `features/`: It follows a hexagonal architecture composed of:
+  - **Domain**: The core of the application where the business logic and main entities are defined.
+  - **Adapters**: This layer handles the input and output of the application, including actions, api services, and validation schemas for inputs.
+  - **Use-Cases**: This layer defines the application logic that orchestrates the domain operations, using the entities and services defined in the domain.
 
 ## Environment Variables
 
